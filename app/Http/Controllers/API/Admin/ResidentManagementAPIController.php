@@ -16,7 +16,9 @@ class ResidentManagementAPIController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'residents' => User::all()
+        ]);
     }
 
     /**

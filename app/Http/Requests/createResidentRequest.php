@@ -13,7 +13,7 @@ class createResidentRequest extends FormRequest
      */
     public function authorize()
     {
-        if(!Auth::check()) {
+        if(Auth::check()) {
             return true;
         }
       

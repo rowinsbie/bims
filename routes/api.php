@@ -17,13 +17,13 @@ use App\Http\Controllers\API\Admin\ResidentManagementAPIController;
 |
 */
 
-Route::apiResource('resident-management',ResidentManagementAPIController::class);
 
 
 Route::middleware(['auth:sanctum'])->group(function() {
     
     // Resident management API Calls
-    
+    Route::apiResource('resident-management',ResidentManagementAPIController::class);
+
     
     Route::get('/user',function(Request $request) {
         return $request->user();
