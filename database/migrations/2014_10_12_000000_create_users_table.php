@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
-            $table->string('middle_name');
+            $table->string('middle_name')->nullable();
             $table->string('last_name');
             $table->string('birthdate');
             $table->string('gender');
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('isPWD');
             $table->String('resident_number');
             $table->string('password');
+            $table->string('picture')->nullable();
             $table->timestamps();
         });
 
@@ -38,7 +39,8 @@ return new class extends Migration
             'email' => 'seikirowins.bie.srb@gmail.com',
             'isPWD' => false,
             'resident_number' => 'rd-'.rand(0,9999),
-            'password' => Hash::make('pass1234')
+            'password' => Hash::make('pass1234'),
+            'picture' => 'default.jpg'
         ]);
     }
 

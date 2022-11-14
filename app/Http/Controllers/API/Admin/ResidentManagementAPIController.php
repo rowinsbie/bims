@@ -27,19 +27,22 @@ class ResidentManagementAPIController extends Controller
      */
     public function store(createResidentRequest $request)
     {
+        $resultMessage = "";
         // generate new resident #
         $request['resident_number'] = 'rd-'.rand(date('Y',time()),99999);
         $request['password'] = Hash::make($request['password']);
         try {
             $newResident = User::create($request->all());
-            return response()->json([
-                'message' => 'new resident has been registered'
-            ]);
+            if($newResident) {
+                $resultMessage = "New Resident has been registered";
+            }
         } catch(Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage()
-            ]);
+            $resultMessage = "Error: " . $e->getMessage();
         }
+
+        return response()->json([
+            'message' => $resultMessage
+        ]);
     }
 
     /**
