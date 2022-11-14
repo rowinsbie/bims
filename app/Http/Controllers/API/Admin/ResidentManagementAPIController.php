@@ -55,7 +55,15 @@ class ResidentManagementAPIController extends Controller
      */
     public function show($id)
     {
-        //
+        $residentInformation = User::find($id);
+        if(!$residentInformation)
+        {
+            abort(404);
+        }
+
+        return response()->json([
+            'data' => $residentInformation
+        ]);
     }
 
     /**
