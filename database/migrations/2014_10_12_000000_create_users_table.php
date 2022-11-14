@@ -15,13 +15,31 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('middle_name');
+            $table->string('last_name');
+            $table->string('birthdate');
+            $table->string('gender');
+            $table->string('contact_no');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('isPWD');
+            $table->String('resident_number');
             $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            'first_name' => 'Seiki Rowins',
+            'middle_name' => 'Limpin',
+            'last_name' => 'Bie',
+            'birthdate' => date('Y-m-d',strtotime('1997-02-25')),
+            'gender' => 'Male',
+            'contact_no' => '09077755144',
+            'email' => 'seikirowins.bie.srb@gmail.com',
+            'isPWD' => false,
+            'resident_number' => 'rd-'.rand(0,9999),
+            'password' => Hash::make('pass1234')
+        ]);
     }
 
     /**
