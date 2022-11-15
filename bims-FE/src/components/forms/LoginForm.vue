@@ -1,4 +1,17 @@
-<script setup lang="ts">
+<script  lang="ts">
+import {defineComponent} from 'vue';
+import http from '../../http/Http';
+export default defineComponent({
+    data() {
+        return {
+
+        }
+    },
+    async mounted(){
+        const data = await http.get('/resident-management');
+        console.log(data);
+    }
+});
 </script>
 <template>
    <div>
