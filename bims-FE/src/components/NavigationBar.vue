@@ -3,37 +3,31 @@
 </script>
 
 <template>
-    <nav>
-        <h1>nav</h1>
-        <ul class="nav-group">
-            <li>
-                <a href="">Home</a>
-            </li>
-            <li>
-                <a href="">About</a>
-            </li>
-            <li>
-                <a href="">Officials</a>
-            </li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container">
+            <a class="navbar-brand" href="#">BIMS</a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+          </div>
+        </div>
     </nav>
 </template>
 <style lang="scss">
     nav {
-        display: flex;
-        justify-content: space-around;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        color: white;
-        background-color: black;
-        padding: 1rem 1rem;
-        .nav-group {
-            display: flex;
-            li {
-                padding: 0 1rem;
-            }
-        }
+        box-shadow: 1px 1px 1px rgb(238, 238, 238);
     }
 </style>
