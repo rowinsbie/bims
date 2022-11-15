@@ -20,14 +20,18 @@ export default defineComponent({
         async Login(){
             const Login = useAuthManagement();
             const result = await Login.AuthenticateUser(this.credentials);
-            if(result) {
+            if(result.status && result.status == 200) {
+                localStorage.setItem('token',result.data.token);
+                location.href = "/dashboard";
+            } else {
                 const response = result.response;
                 this.AuthResult = {
                     httpCode:response.status,
                     httpMessage:response.data.message
                 }
-                
             }
+
+                
         }
     }
     

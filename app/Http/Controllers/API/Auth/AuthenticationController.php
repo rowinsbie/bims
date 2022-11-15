@@ -31,7 +31,8 @@ class AuthenticationController extends Controller
         $token = $user->createToken($user->id)->plainTextToken;
         return response()->json([
             'uid' => $user->id,
-            'token' => $token
+            'token' => $token,
+            'message' => 'Access Granted'
         ]);
     }
 

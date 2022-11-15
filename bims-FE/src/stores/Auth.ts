@@ -25,9 +25,10 @@ export const useAuthManagement = defineStore('Auth',{
             try {
                 this.userData = await http.post('authenticate',credentials);
             
-                if(this.userData) {
-                    localStorage.setItem('token',this.userData.data.token);
-                }
+                // if(this.userData) {
+                //     localStorage.setItem('token',this.userData.data.token);
+                // }
+                return this.userData;
             } catch(error:any) {
                return error;
             }
