@@ -24,10 +24,6 @@ export const useAuthManagement = defineStore('Auth',{
         async AuthenticateUser(credentials:UserCredentials) {
             try {
                 this.userData = await http.post('authenticate',credentials);
-            
-                // if(this.userData) {
-                //     localStorage.setItem('token',this.userData.data.token);
-                // }
                 return this.userData;
             } catch(error:any) {
                return error;

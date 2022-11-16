@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, type RouteLocationNormalized } from "vue-router";
 import LoginView from "../views/LoginView.vue";
 import DashboardView from "../views/auth/DashboardView.vue";
 const router = createRouter({
@@ -12,7 +12,10 @@ const router = createRouter({
         {
             path:"/dashboard",
             name:"dashboard",
-            component:DashboardView
+            component:DashboardView,
+            meta:{
+                requiresAuth:true
+            }
         },
         {
             path: "/about",
@@ -23,6 +26,13 @@ const router = createRouter({
             component: () => import("../views/AboutView.vue"),
         },
     ],
+});
+
+router.beforeEach((to:RouteLocationNormalized,from:RouteLocationNormalized,next:Function) => {
+    const isAuthenticated = localStorage.getItem('token');
+    if((to.name !== 'login' && to.meta.requiresAuth) && !isAuthenticated) next({name:'login'}) // check if authenticated
+    else if(isAuthenticated && to.name == 'login') next({name:'dashboard'})  // redirect to dashboard if authenticated and going on route login
+    else next();
 });
 
 export default router;
