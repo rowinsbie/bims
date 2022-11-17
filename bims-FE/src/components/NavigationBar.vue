@@ -1,5 +1,11 @@
-<script setup lang="ts">
-    
+<script  lang="ts">
+import  { defineComponent } from 'vue';
+import UserPhoto from './kits/UserPhoto.vue';
+export default defineComponent({
+    components:{
+      UserPhoto
+    }
+});
 </script>
 
 <template>
@@ -11,15 +17,14 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+           
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link" href="#">
+                  <font-awesome-icon class="icons" icon="fa-solid fa-bell" />                </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <UserPhoto :width="2" :height="2" />
               </li>
             </ul>
           </div>
@@ -29,5 +34,19 @@
 <style lang="scss">
     nav {
         box-shadow: 1px 1px 1px rgb(238, 238, 238);
+
+        .navbar-brand{
+          font-family: 'frank-black';
+          font-size: 2rem;
+        }
+
+        .nav-item {
+          padding-right: 1rem;
+          .nav-link {
+            .icons {
+              font-size: 1.3rem;
+            }
+          }
+        }
     }
 </style>

@@ -21,7 +21,6 @@ export default defineComponent({
 })
 </script>
 <template>
-<h1>Welcome {{this.userData.first_name}}</h1>
 </template>
 <style lang="scss">
 </style>
