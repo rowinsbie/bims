@@ -2,35 +2,41 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    props:['dropDownList'],
+    props:['dropDownList','width','title'],
     data() {
         return {}
     },
     methods:{
         openDropDown() {
-            const dropList:HTMLElement = document.getElementById('drop-list');
+            const dropList = document.getElementById('drop-list');
             dropList.style.display = "block";
         },
         closeDropDown() {
-            const dropList:HTMLElement = document.getElementById('drop-list');
+            const dropList = document.getElementById('drop-list');
             dropList.style.display = "none";
         }
     },
-    mounted() {
+    computed:{
+        dropDownWidth() {
+            return "width:"+this.width+"rem;";
+        }
     }
 });
 </script>
 <template>
-   <div class="drop-down" v-on:click="openDropDown()" v-on:mouseleave="closeDropDown()">
+   <div class="drop-down"  v-on:click="openDropDown()" v-on:mouseleave="closeDropDown()">
     <font-awesome-icon class="drop-down-btn" icon="fa-solid fa-caret-down"  />
-    <ul class="drop-list" id="drop-list">
+    <ul class="drop-list" :style="[dropDownWidth]" id="drop-list">
+        <li>
+            <h3>{{this.title}}</h3>
+        </li>
         <li v-for="(value) in dropDownList" :key="value.index">
            <div v-if="value.type == 'link'">
             <RouterLink to="/" class="text-dark">
                 <font-awesome-icon :icon="value.icon" /> {{value.text}} 
                </RouterLink>
            </div>
-           <button v-else type="button" class="btn btn-primary">Log Out</button>
+           <button v-if="value.type == 'button'" type="button" class="btn btn-primary">{{value.text}}</button>
         </li>
     </ul>
    </div>
@@ -41,8 +47,9 @@ export default defineComponent({
     position: absolute;
     background-color: white;
     padding: 1rem 1rem;
-    width: 10rem;
     display: none;
+    left: 74rem;
+    max-width: 100%;
     li {
         padding: 0.2rem 0rem;
     }

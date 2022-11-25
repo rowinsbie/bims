@@ -1,9 +1,11 @@
 <script  lang="ts">
 import  { defineComponent } from 'vue';
 import UserPhoto from './kits/UserPhoto.vue';
+import NotificationBell from '../components/NotificationBell.vue';
 export default defineComponent({
     components:{
-      UserPhoto
+      UserPhoto,
+      NotificationBell
     }
 });
 </script>
@@ -20,8 +22,7 @@ export default defineComponent({
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
            
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <font-awesome-icon class="icons" icon="fa-solid fa-bell" />                </a>
+                <NotificationBell />
               </li>
               <li class="nav-item">
                 <UserPhoto :width="2" :height="2" />
@@ -34,7 +35,7 @@ export default defineComponent({
 <style lang="scss">
     nav {
         box-shadow: 1px 1px 1px rgb(238, 238, 238);
-
+        background-color: rgb(255, 255, 255);
         .navbar-brand{
           font-family: 'frank-black';
           font-size: 2rem;

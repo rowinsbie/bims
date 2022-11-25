@@ -47,7 +47,7 @@ export default defineComponent({
             <img class="user-picture" :style="[imgWidth,imgHeight]" src="../../assets/images/user/user-picture.jpg" />
         </div>
         <div class="m-2">
-           <DropDownVue :drop-down-list="dropDownList()" />
+           <DropDownVue :title="'User Information'" :width="10" :drop-down-list="dropDownList()" />
         </div>
     </div>
 </template>
