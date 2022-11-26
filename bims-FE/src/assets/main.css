@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "frank-regular";
+  src: url(./fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Regular.ttf);
+}
+@font-face {
+  font-family: "frank-bold";
+  src: url(./fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Bold.ttf);
+}
+@font-face {
+  font-family: "frank-black";
+  src: url(./fonts/Frank_Ruhl_Libre/FrankRuhlLibre-Black.ttf);
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  line-height: 1.6;
+  font-family: "frank-regular";
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "frank-bold";
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}/*# sourceMappingURL=main.css.map */

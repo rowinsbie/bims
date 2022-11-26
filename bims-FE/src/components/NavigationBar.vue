@@ -1,17 +1,17 @@
 <script  lang="ts">
 import  { defineComponent } from 'vue';
-import UserPhoto from './kits/UserPhoto.vue';
+import UserSetting from './kits/UserSetting.vue';
 import NotificationBell from '../components/NotificationBell.vue';
 export default defineComponent({
     components:{
-      UserPhoto,
+      UserSetting,
       NotificationBell
     }
 });
 </script>
 
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light ">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container">
             <a class="navbar-brand" href="#">BIMS</a>
 
@@ -25,7 +25,8 @@ export default defineComponent({
                 <NotificationBell />
               </li>
               <li class="nav-item">
-                <UserPhoto :width="2" :height="2" />
+                <UserSetting :width="3" :height="3" />
+             
               </li>
             </ul>
           </div>
@@ -35,7 +36,7 @@ export default defineComponent({
 <style lang="scss">
     nav {
         box-shadow: 1px 1px 1px rgb(238, 238, 238);
-        background-color: rgb(255, 255, 255);
+        background-color: rgb(3, 81, 182);
         .navbar-brand{
           font-family: 'frank-black';
           font-size: 2rem;
