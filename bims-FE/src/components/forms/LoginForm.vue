@@ -38,7 +38,7 @@ export default defineComponent({
 });
 </script>
 <template>
-   <div>
+   <div class="login-form">
         <h3>Sign to your account</h3>
         <form method="POST">
             <div class="form-group mt-3">
@@ -58,3 +58,8 @@ export default defineComponent({
         </form>
    </div>
 </template>
+<style lang="scss" scoped>
+.login-form {
+    padding: 3rem 1rem;
+}
+</style>

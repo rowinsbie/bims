@@ -13,7 +13,9 @@ export default defineComponent({
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container">
-            <a class="navbar-brand" href="#">BIMS</a>
+            <a class="navbar-brand" href="#">
+              <img src="../assets/images/dilg_logo.png" width="40"  alt="city building">
+            </a>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -35,7 +37,7 @@ export default defineComponent({
 </template>
 <style lang="scss">
     nav {
-        box-shadow: 1px 1px 1px rgb(238, 238, 238);
+        box-shadow: 1px 1px 1px rgb(11, 58, 185);
         background-color: rgb(3, 81, 182);
         .navbar-brand{
           font-family: 'frank-black';
