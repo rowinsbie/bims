@@ -49,12 +49,12 @@ export default defineComponent({
         justify-content: end;
         align-items: flex-end;
         .action-buttons {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: rgb(88, 164, 235);
         }
         li:last-child {
             button {
-                border-radius: 10px 10px 10px 10px;
+                border-radius: 50px 50px 50px 50px;
             }
         }
        

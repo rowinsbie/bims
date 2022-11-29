@@ -51,20 +51,20 @@ export default defineComponent({
 
     .notification-menu {
         .dropdown-menu {
-            background-color: rgb(3, 81, 182);
+            background-color: rgb(255, 255, 255);
             padding: 1rem 1rem;
-            color: white;
+            color: rgb(10, 10, 10);
             left: auto;
             right: 0;
             .dropdown-item {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 max-width: 300px;
-                color: white;
+                color: rgb(0, 0, 0);
 
             }
             .dropdown-item:hover {
-                background-color: rgb(26, 106, 211);
+                background-color: rgb(231, 231, 231);
             }
         }
     }
