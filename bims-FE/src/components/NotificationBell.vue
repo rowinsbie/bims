@@ -22,7 +22,7 @@ export default defineComponent({
 
             </div>
             <div class="notification-menu">
-                <ul class="dropdown-menu " >
+                <ul class="dropdown-menu dropdown-menu-left" >
                     <li class="dropdown-title">
                         <h4>Notifications</h4>
                     </li>
@@ -54,6 +54,8 @@ export default defineComponent({
             background-color: rgb(3, 81, 182);
             padding: 1rem 1rem;
             color: white;
+            left: auto;
+            right: 0;
             .dropdown-item {
                 overflow: hidden;
                 text-overflow: ellipsis;
