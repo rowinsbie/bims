@@ -11,7 +11,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top ">
         <div class="container">
             <a class="navbar-brand" href="#">
               <img src="../assets/images/dilg_logo.png" width="40"  alt="city building">
