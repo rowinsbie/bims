@@ -6,12 +6,21 @@ export default defineComponent({
     components:{
       UserSetting,
       NotificationBell
+    },
+    methods:{
+      isAuth() {
+        if(!localStorage.getItem('token'))
+        {
+          return false;
+        }
+        return true;
+      }
     }
 });
 </script>
 
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top ">
+    <nav v-bind:class="['navbar', 'navbar-expand-lg','navbar-dark fixed-top', isAuth() ? 'bg-nav-2' : 'bg-nav-1']" >
         <div class="container">
             <a class="navbar-brand" href="#">
               <img src="../assets/images/dilg_logo.png" width="40"  alt="city building">
@@ -36,9 +45,21 @@ export default defineComponent({
     </nav>
 </template>
 <style lang="scss">
-    nav {
-        box-shadow: 1px 1px 1px rgb(11, 58, 185);
+
+    .bg-nav-1 {
+      box-shadow: 1px 1px 1px rgb(11, 58, 185);
         background-color: rgb(3, 81, 182);
+        color: white;
+    }
+
+    .bg-nav-2 {
+      box-shadow: 1px 1px 1px rgb(238, 238, 238);
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
+
+    nav {
+        
         .navbar-brand{
           font-family: 'frank-black';
           font-size: 2rem;

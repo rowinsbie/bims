@@ -26,3 +26,13 @@ import  { defineComponent } from 'vue';
         <img   class="" :style="[imgWidth,imgHeight]" :src=imgSrc />
     </div>
 </template>
+<style lang="scss">
+.circle {
+    border-radius: 50%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    max-width: fit-content;
+    border: 3px solid rgb(238, 90, 4);
+}
+</style>

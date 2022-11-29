@@ -45,14 +45,7 @@ export default defineComponent({
     #picture-component {
  
         cursor: pointer;
-        .circle {
-            border-radius: 50%;
-            overflow: hidden;
-            justify-content: center;
-            align-items: center;
-            max-width: fit-content;
-            border: 3px solid rgb(238, 90, 4);
-        }
+       
        .dropdown-menu {
         left: auto;
         right: 0;

@@ -16,7 +16,7 @@ export default defineComponent({
 <template>
     <div id="notification ">
         <div class="dropdown">
-            <div class="text-white notification-icon-wrapper" data-bs-toggle="dropdown" >
+            <div class=" notification-icon-wrapper" data-bs-toggle="dropdown" >
                 <font-awesome-icon icon="fa-solid fa-bell" class="notification-bell" />
                 <span class="badge rounded-pill badge-notification bg-danger">9</span>
 
