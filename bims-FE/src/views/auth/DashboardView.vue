@@ -4,6 +4,10 @@ import http from '../../http/Http';
 import UserPicture from '@/components/kits/CircleImage.vue';
 import PostForm from '@/components/social_media/PostForm.vue';
 import DefaultPicture from '../../assets/images/user/user-picture.jpg';
+
+// data types
+import type {User} from '../../types/index';
+
 export default defineComponent({
     components:{
         UserPicture,
@@ -12,19 +16,19 @@ export default defineComponent({
     data() {
         return {
             picture:DefaultPicture,
-            userData:{
-                first_name:null,
-                last_name:null
-            }
+            user:{} as User
         }
     },
     methods:{
         async getUserInfo() {
             const user = await http.get('user');
             if(user) {
-                this.userData = user.data;
+                this.user = user.data;
             }
         },
+        showFullName() : String {
+            return this.user.first_name + " " + this.user.last_name;
+        }
     },
     mounted() {
         this.getUserInfo();
@@ -36,14 +40,10 @@ export default defineComponent({
         <div class="row mt-5">
             <div class="col-lg-3 mt-5">
                         <UserPicture :width="10" height="10" :imgSrc="picture" />
-                        <h4 class="mt-3">{{userData.first_name}} {{userData.last_name}}</h4>
+                        <h4 class="mt-3">{{showFullName()}}</h4>
             </div>
             <div class="col-lg-6 mt-5">
-                <div class="card mt-3 card-with-radius">
-                    <div class="card-body">
-                      <PostForm />
-                    </div>
-                </div>
+              
             </div>
 
         </div>
