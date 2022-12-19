@@ -18,13 +18,14 @@ export default defineComponent({
         <div class="dropdown">
             <div class=" notification-icon-wrapper" data-bs-toggle="dropdown" >
                 <font-awesome-icon icon="fa-solid fa-bell" class="notification-bell" />
-                <span class="badge rounded-pill badge-notification bg-danger">9</span>
+                <span class="badge rounded-pill badge-notification bg-danger total-notification">9</span>
 
             </div>
             <div class="notification-menu">
                 <ul class="dropdown-menu dropdown-menu-left" >
                     <li class="dropdown-title">
                         <h4>Notifications</h4>
+                        <hr />
                     </li>
                     <li><a class="dropdown-item" href="#">
                         <font-awesome-icon icon="fa-solid fa-circle-info" /> a new residents has been registered a new residents has been registered
@@ -39,6 +40,11 @@ export default defineComponent({
     </div>
 </template>
 <style lang="scss" scoped>
+@import '../assets/variables';
+.notification-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    padding: 2px 10px;
     .notification-bell {
         cursor: pointer;
         display: block;
@@ -48,6 +54,16 @@ export default defineComponent({
         margin-top: 1rem;
         position: relative;
     }
+
+    .total-notification {
+        position: absolute;
+        top: -0;
+        right: 0;
+        
+
+    }
+}
+   
 
     .notification-menu {
         .dropdown-menu {
@@ -59,7 +75,6 @@ export default defineComponent({
             .dropdown-item {
                 overflow: hidden;
                 text-overflow: ellipsis;
-                max-width: 300px;
                 color: rgb(0, 0, 0);
 
             }
@@ -69,7 +84,7 @@ export default defineComponent({
         }
     }
 
-   
+  
  
     
 </style>

@@ -1,7 +1,21 @@
 @import 'fonts';
+@import 'variables';
 @import 'resetter';
 @import 'colors';
 
 .card-with-radius {
     border-radius: 20px 20px 20px 20px;
+}
+
+@media screen and (max-width: $xsAndsm),
+screen and (max-width:$xsAndsm) {
+    .dropdown {
+        position: static;
+        .dropdown-menu {
+            left: 0 !important;
+            margin: auto !important;
+            right: 0 !important;
+            width: 100%;
+        }
+    }
 }

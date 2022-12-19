@@ -27,6 +27,10 @@ export default defineComponent({
                 <UserPicture :width="3" :height="3" :imgSrc="renderImg" />
             </div>
             <ul class="dropdown-menu">
+              <li class="dropdown-title ">
+                <h4>Account Center</h4>
+                <hr />
+            </li>
               <li><a class="dropdown-item" href="#">
                 <font-awesome-icon icon="fa-solid fa-circle-user" /> Profile
               </a></li>
@@ -42,13 +46,21 @@ export default defineComponent({
     </div>
 </template>
 <style lang="scss">
+@import '../../assets/variables';
+
     #picture-component {
  
-        cursor: pointer;
-       
-       .dropdown-menu {
-        left: auto;
-        right: 0;
+      cursor: pointer;
+      .dropdown {
+        .dropdown-menu {
+          left: auto;
+          right: 0;
+          padding: 1rem 1rem;
+          .dropdown-item {
+            width: 300px ;
+
+          }
        }
+      }
 }
 </style>
