@@ -21,7 +21,7 @@ export default defineComponent({
 
 <template>
     <nav v-bind:class="['navbar', 'navbar-expand-lg','navbar-dark fixed-top', isAuth() ? 'bg-nav-2' : 'bg-nav-1']" >
-        <div class="container">
+        <div v-bind:class="[isAuth() ? 'container-fluid' : 'container']">
             <a class="navbar-brand" href="#">
               <img src="../assets/images/dilg_logo.png" width="40"  alt="city building">
             </a>

@@ -38,13 +38,7 @@ export default defineComponent({
 <template>
     <div class="container mt-5">
         <div class="row mt-5">
-            <div class="col-lg-3 mt-5">
-                        <UserPicture :width="10" height="10" :imgSrc="picture" />
-                        <h4 class="mt-3">{{showFullName()}}</h4>
-            </div>
-            <div class="col-lg-6 mt-5">
-              
-            </div>
+           
 
         </div>
     </div>
