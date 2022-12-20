@@ -16,6 +16,8 @@ screen and (max-width:$xsAndsm) {
             margin: auto !important;
             right: 0 !important;
             width: 100%;
+            border-radius: 0px;
+            border-color: rgb(238, 238, 238);
         }
     }
 }
