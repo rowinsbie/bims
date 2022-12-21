@@ -1,16 +1,38 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-
-export default defineComponent({});
+import mainItemsVue from "./kits/sidebar/mainItems.vue";
+export default defineComponent({
+   components:{
+        mainItemsVue
+   }
+});
 </script>
 <template>
     <div class="sidebar-container container">
         <div class="sidebar">
             <div class="sb-header">
-            
                 <h3>BIMS</h3>
             </div>
-            
+            <div class="sb-body">
+                <ul class="sb-links">
+                    <mainItemsVue />
+                    <li>
+                        <font-awesome-icon
+                        class="sb-icon"
+                        icon="fa-solid fa-certificate" />
+                        <a href="">
+                            <span>Certificates</span>
+                        </a>
+                    </li>
+                    <li>
+                        <font-awesome-icon class="sb-icon" icon="fa-solid fa-file" />
+                        <a href="">
+                            <span>Incidents</span>
+                        </a>
+                    </li>
+                 
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -24,9 +46,9 @@ export default defineComponent({});
         left: 0;
         height: 100%;
         width: 250px;
-        padding: 10px 14px;
-        background:rgb(255, 255, 255);
+        background: rgb(255, 255, 255);
         border-right: 1px solid rgb(245, 245, 245);
+        z-index: 99;
         // header
         .sb-header {
             border-bottom: 1px solid rgb(230, 230, 230);
@@ -34,10 +56,34 @@ export default defineComponent({});
             align-items: center;
             justify-content: center;
             padding: 20px 0px;
-          
         }
         //body
-       
+        .sb-body {
+            height: 100%;
+            .sb-links {
+               
+                li {
+                    &.sb-main-item:nth-child(4){
+                        display: none;
+                    }
+                    position: relative;
+                    list-style: none;
+                    padding: 1rem 0rem;
+                    .sb-icon {
+                        min-width: 78px;
+                        text-align: start;
+                        line-height: 50px;
+                        color: black;
+                    }
+                    a {
+                        span {
+                            color: black;
+                            font-family: "roboto-bold";
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -46,25 +92,43 @@ export default defineComponent({});
         border-right: unset !important;
         position: unset;
         background-color: unset !important;
-
-    }
-    .sb-header {
-        display: none !important;
-    }
-    .sb-body {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        .sb-item-group {
-            border-top: 1px solid rgb(226, 226, 226);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            overflow: scroll;
-            .sb-link {
-                span {
-                    display: none;
+        .sb-header {
+            display: none !important;
+        }
+        .sb-body { 
+         
+            .sb-links {
+                position: fixed;
+                bottom: -0;
+                right: 0;
+                left: 0;
+                border-top: 1px solid rgb(241, 241, 241);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0rem 0rem !important;
+               
+                li {
+                    
+                    &:not(.sb-main-item) {
+                      display: none;
+                    }
+                    &.sb-main-item:nth-child(4){
+                        display: inline-block !important;
+                    }
+                  
+                    .sb-icon {
+                        text-align: center !important;
+                    }
+                    a {
+                        
+                        span {
+                            display: flex;
+                            justify-content: center;
+                            font-size: 12px;
+                           
+                        }
+                    }
                 }
             }
         }
