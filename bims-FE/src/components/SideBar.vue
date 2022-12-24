@@ -1,10 +1,26 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import mainItemsVue from "./kits/sidebar/mainItems.vue";
+import mainSidebarItems from "./kits/sidebar/mainItems.vue";
+import otherSidebarItems from "./kits/sidebar/otherItems.vue";
+import mobileSidebarVue from "./kits/sidebar/mobileSidebar.vue";
+import UserSetting from './kits/UserPicture.vue';
 export default defineComponent({
-   components:{
-        mainItemsVue
-   }
+    components: {
+        mainSidebarItems,
+        otherSidebarItems,
+        UserSetting,
+        mobileSidebarVue
+    },
+    data() {
+        return {
+            isOpen:false
+        }
+    },
+    computed: {
+        isSidebarOpen() {
+            return this.isOpen;
+        }
+    }
 });
 </script>
 <template>
@@ -12,29 +28,21 @@ export default defineComponent({
         <div class="sidebar">
             <div class="sb-header">
                 <h3>BIMS</h3>
+                <hr />
             </div>
             <div class="sb-body">
+                
                 <ul class="sb-links">
-                    <mainItemsVue />
-                    <li>
-                        <font-awesome-icon
-                        class="sb-icon"
-                        icon="fa-solid fa-certificate" />
-                        <a href="">
-                            <span>Certificates</span>
-                        </a>
-                    </li>
-                    <li>
-                        <font-awesome-icon class="sb-icon" icon="fa-solid fa-file" />
-                        <a href="">
-                            <span>Incidents</span>
-                        </a>
-                    </li>
-                 
+                    <mainSidebarItems />
+                    <otherSidebarItems  />
+                    <mobileSidebarVue />
                 </ul>
+                
             </div>
         </div>
     </div>
+
+    
 </template>
 <style lang="scss">
 @import "../assets/variables";
@@ -60,12 +68,13 @@ export default defineComponent({
         //body
         .sb-body {
             height: 100%;
+           
             .sb-links {
-               
                 li {
-                    &.sb-main-item:nth-child(4){
+                    &.sb-main-item:nth-child(4) {
                         display: none;
                     }
+                    
                     position: relative;
                     list-style: none;
                     padding: 1rem 0rem;
@@ -87,6 +96,8 @@ export default defineComponent({
     }
 }
 
+
+
 @media screen and (max-width: $xsAndsm) {
     .sidebar {
         border-right: unset !important;
@@ -95,8 +106,9 @@ export default defineComponent({
         .sb-header {
             display: none !important;
         }
-        .sb-body { 
-         
+        .sb-body {
+
+           
             .sb-links {
                 position: fixed;
                 bottom: -0;
@@ -107,31 +119,33 @@ export default defineComponent({
                 justify-content: center;
                 align-items: center;
                 padding: 0rem 0rem !important;
-               
+
                 li {
-                    
                     &:not(.sb-main-item) {
-                      display: none;
-                    }
-                    &.sb-main-item:nth-child(4){
-                        display: inline-block !important;
+                        display: none;
                     }
                   
+                    &.sb-main-item:nth-child(4) {
+                        display: inline-block !important;
+                    }
+
                     .sb-icon {
                         text-align: center !important;
                     }
                     a {
-                        
                         span {
                             display: flex;
                             justify-content: center;
                             font-size: 12px;
-                           
                         }
                     }
                 }
             }
         }
     }
+   
 }
+
+
+
 </style>

@@ -2,7 +2,6 @@
 import  { defineComponent } from 'vue';
 import http from '../../http/Http';
 import UserPicture from '@/components/kits/CircleImage.vue';
-import PostForm from '@/components/social_media/PostForm.vue';
 import DefaultPicture from '../../assets/images/user/user-picture.jpg';
 
 // data types
@@ -11,7 +10,6 @@ import type {User} from '../../types/index';
 export default defineComponent({
     components:{
         UserPicture,
-        PostForm
     },
     data() {
         return {

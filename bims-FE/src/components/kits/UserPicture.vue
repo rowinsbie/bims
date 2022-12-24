@@ -1,9 +1,11 @@
 <script lang="ts">
 import  { defineComponent } from 'vue';
-import UserPicture from '../kits/CircleImage.vue';
+import UserPicture from './CircleImage.vue';
 import DefaultPicture from '../../assets/images/user/user-picture.jpg';
 export default defineComponent({
-   
+    props:[
+      'isWithDropDown'
+    ],
     components:{
         UserPicture
     },
@@ -22,11 +24,11 @@ export default defineComponent({
 <template>
     <div id="picture-component" >
         
-        <div class="dropdown ">
+        <div :class="[isWithDropDown ? 'dropdown':'']">
             <div class=" " data-bs-toggle="dropdown" >
                 <UserPicture :width="3" :height="3" :imgSrc="renderImg" />
             </div>
-            <ul class="dropdown-menu">
+            <ul v-if="isWithDropDown" class="dropdown-menu">
               <li class="dropdown-title ">
                 <h4>Account Center</h4>
                 <hr />

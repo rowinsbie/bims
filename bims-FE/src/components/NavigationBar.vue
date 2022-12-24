@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import UserSetting from "./kits/UserSetting.vue";
+import UserSetting from "./kits/UserPicture.vue";
 import NotificationBell from "../components/NotificationBell.vue";
 export default defineComponent({
     components: {
@@ -38,7 +38,7 @@ export default defineComponent({
                 </a>
                 <div v-if="isAuth()" class="" id="navbar-right-items">
                     <NotificationBell />
-                    <UserSetting :width="3" :height="3" />
+                    <UserSetting :isWithDropDown="true" :width="3" :height="3" />
                 </div>
             </div>
         </nav>

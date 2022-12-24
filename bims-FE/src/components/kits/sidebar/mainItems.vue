@@ -1,7 +1,20 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-
-export default defineComponent({});
+export default defineComponent({
+    props:[
+        'isOpen'
+    ],
+    components:{
+    },
+    data() {
+        return {
+           
+        }
+    },
+    methods:{
+     
+    }
+});
 </script>
 <template>
     <li class="sb-main-item">
@@ -31,10 +44,15 @@ export default defineComponent({});
             <span>Residents</span>
         </a>
     </li>
-    <li class="sb-main-item">
-        <font-awesome-icon class="sb-icon" icon="fa-solid fa-bars" />
-        <a href="">
-            <span>More</span>
-        </a>
-    </li>
+   
 </template>
+<style lang="scss">
+.d-menu-up {
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: auto;
+    
+}
+</style>
