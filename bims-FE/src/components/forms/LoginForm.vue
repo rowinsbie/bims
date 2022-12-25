@@ -52,14 +52,32 @@ export default defineComponent({
             <div class="form-group mt-3">
                 <button v-on:click="Login()" type="button" class="btn btn-primary form-control">Sign In</button>
             </div>
-            <div v-if="AuthResult.httpCode == 422" class="form-group mt-3 text-center">
-                <span class="badge bg-danger">{{AuthResult.httpMessage}}</span>
+            <div v-if="AuthResult.httpCode == 422" class="form-group mt-3 text-center failed-message">
+                <font-awesome-icon class="text-white" icon="fa-solid fa-circle-exclamation" />
+                <span class="badge">{{AuthResult.httpMessage}}</span>
             </div>
         </form>
    </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss" >
 .login-form {
     padding: 3rem 1rem;
+
+    .failed-message {
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(196, 17, 47);
+        position: sticky;
+        padding: 0rem 0rem !important;
+        left: 0;
+        bottom: 0;
+        font-size: 20px;
+        border-radius: 20px 20px 20px 20px;
+        .badge {
+            padding: 1rem 0.5rem;
+        }
+    }
 }
 </style>
