@@ -52,7 +52,7 @@ export default defineComponent({
         width: 250px;
         background: rgb(255, 255, 255);
         border-right: 1px solid rgb(245, 245, 245);
-        z-index: 99;
+        z-index: 100;
         // header
         .sb-header {
             border-bottom: 1px solid rgb(230, 230, 230);
