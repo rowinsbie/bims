@@ -28,6 +28,22 @@ export const useAuthManagement = defineStore('Auth',{
             } catch(error:any) {
                return error;
             }
+        },
+        async SignOut() {
+            try {
+                if(localStorage.getItem('token') !== null) {
+                    const isSignOut = await http.get('sign-out');
+                    if(isSignOut) {
+                        localStorage.clear();
+                        location.href = "/";
+                    }
+                }
+               
+            } catch(error:any) {
+                localStorage.clear();
+                location.href = "/";
+                return error;
+            }
         }
     }
 });

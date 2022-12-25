@@ -2,12 +2,14 @@
 import  { defineComponent } from 'vue';
 import UserPicture from './CircleImage.vue';
 import DefaultPicture from '../../assets/images/user/user-picture.jpg';
+import signOutButton from './signOutButton.vue';
 export default defineComponent({
     props:[
       'isWithDropDown'
     ],
     components:{
-        UserPicture
+        UserPicture,
+        signOutButton
     },
     data() {
         return {
@@ -39,9 +41,9 @@ export default defineComponent({
               <li><a class="dropdown-item" href="#">
                 <font-awesome-icon icon="fa-solid fa-gear" /> Setting
               </a></li>
-              <li><a class="dropdown-item" href="#">
-                <font-awesome-icon icon="fa-solid fa-right-from-bracket" /> Sign Out
-              </a></li>
+              <li>
+                <signOutButton />
+              </li>
             </ul>
           </div>
 
