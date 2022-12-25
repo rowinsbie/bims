@@ -1,26 +1,26 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import mainSidebarItems from "./kits/sidebar/mainItems.vue";
-import otherSidebarItems from "./kits/sidebar/otherItems.vue";
+import mainLinks from "./kits/sidebar/mainLinks.vue";
+import otherLinks from "./kits/sidebar/otherLinks.vue";
 import mobileSidebarVue from "./kits/sidebar/mobileSidebar.vue";
-import UserSetting from './kits/UserPicture.vue';
+import UserSetting from "./kits/UserPicture.vue";
 export default defineComponent({
     components: {
-        mainSidebarItems,
-        otherSidebarItems,
+        mainLinks,
+        otherLinks,
         UserSetting,
-        mobileSidebarVue
+        mobileSidebarVue,
     },
     data() {
         return {
-            isOpen:false
-        }
+            isOpen: false,
+        };
     },
     computed: {
         isSidebarOpen() {
             return this.isOpen;
-        }
-    }
+        },
+    },
 });
 </script>
 <template>
@@ -31,18 +31,14 @@ export default defineComponent({
                 <hr />
             </div>
             <div class="sb-body">
-                
                 <ul class="sb-links">
-                    <mainSidebarItems />
-                    <otherSidebarItems  />
+                    <mainLinks />
+                    <otherLinks />
                     <mobileSidebarVue />
                 </ul>
-                
             </div>
         </div>
     </div>
-
-    
 </template>
 <style lang="scss">
 @import "../assets/variables";
@@ -68,13 +64,13 @@ export default defineComponent({
         //body
         .sb-body {
             height: 100%;
-           
+
             .sb-links {
                 li {
                     &.sb-main-item:nth-child(4) {
                         display: none;
                     }
-                    
+
                     position: relative;
                     list-style: none;
                     padding: 1rem 0rem;
@@ -96,8 +92,6 @@ export default defineComponent({
     }
 }
 
-
-
 @media screen and (max-width: $xsAndsm) {
     .sidebar {
         border-right: unset !important;
@@ -107,8 +101,6 @@ export default defineComponent({
             display: none !important;
         }
         .sb-body {
-
-           
             .sb-links {
                 position: fixed;
                 bottom: -0;
@@ -124,7 +116,7 @@ export default defineComponent({
                     &:not(.sb-main-item) {
                         display: none;
                     }
-                  
+
                     &.sb-main-item:nth-child(4) {
                         display: inline-block !important;
                     }
@@ -143,9 +135,5 @@ export default defineComponent({
             }
         }
     }
-   
 }
-
-
-
 </style>
