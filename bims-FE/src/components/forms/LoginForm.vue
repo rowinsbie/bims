@@ -69,7 +69,7 @@ export default defineComponent({
         justify-content: center;
         align-items: center;
         background-color: rgb(196, 17, 47);
-        position: sticky;
+        position: relative;
         padding: 0rem 0rem !important;
         left: 0;
         bottom: 0;
