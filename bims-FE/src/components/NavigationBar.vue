@@ -52,6 +52,7 @@ export default defineComponent({
     color: white;
 }
 .navigation-bar {
+    z-index: 99;
   position: fixed;
   right: 0;
   top: 0;
