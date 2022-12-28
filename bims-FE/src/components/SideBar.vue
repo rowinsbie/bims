@@ -59,7 +59,7 @@ export default defineComponent({
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px 0px;
+            padding: 15px 0px;
         }
         //body
         .sb-body {

@@ -29,13 +29,14 @@ export default defineComponent({
             ]"
         >
             <div v-bind:class="[!isAuth() ? 'container' : 'container-fluid']">
-                <a class="navbar-brand" href="#">
+                <a v-if="!isAuth()" class="navbar-brand" href="#">
                     <img
                         src="../assets/images/dilg_logo.png"
                         width="40"
                         alt="city building"
                     />
                 </a>
+                <div v-else></div>
                 <div v-if="isAuth()" class="" id="navbar-right-items">
                     <NotificationBell />
                     <UserSetting :isWithDropDown="true" :width="3" :height="3" />
