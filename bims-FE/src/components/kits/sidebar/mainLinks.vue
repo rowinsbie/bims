@@ -47,12 +47,5 @@ export default defineComponent({
    
 </template>
 <style lang="scss">
-.d-menu-up {
-    position: absolute !important;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    height: auto;
-    
-}
+
 </style>

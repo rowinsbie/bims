@@ -30,7 +30,7 @@ export default defineComponent({
                     <li><a class="dropdown-item" href="#">
                         <font-awesome-icon icon="fa-solid fa-circle-info" /> a new residents has been registered a new residents has been registered
                     </a></li>
-                    <li><a class="dropdown-item" href="#">
+                    <li><a class="dropdown-item" href="">
                         <font-awesome-icon icon="fa-solid fa-circle-info" /> a new barangay clearance request
                     </a></li>
                   </ul>

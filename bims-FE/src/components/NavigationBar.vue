@@ -52,8 +52,7 @@ export default defineComponent({
     color: white;
 }
 .navigation-bar {
-    z-index: 99;
-  position: fixed;
+  position: fixed; // caused of bug in dropdown
   right: 0;
   top: 0;
     width: calc(100% - 250px);
@@ -73,6 +72,7 @@ export default defineComponent({
 // mobile design
 @media screen and (max-width: $xsAndsm), screen and (max-width: $xsAndsm) {
   .navigation-bar {
+    position: unset !important;
     width: 100% !important;
   }
 }

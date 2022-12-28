@@ -11,13 +11,18 @@
 screen and (max-width:$xsAndsm) {
     .dropdown {
         position: static;
+
         .dropdown-menu {
             left: 0 !important;
-            margin: auto !important;
             right: 0 !important;
             width: 100%;
             border-radius: 0px;
             border-color: rgb(238, 238, 238);
+            .dropdown-item {
+                width: 100% !important;
+              
+    
+              }
         }
     }
 }

@@ -27,6 +27,7 @@ export default defineComponent({
     <div id="picture-component" >
         
         <div :class="[isWithDropDown ? 'dropdown':'']">
+          
             <div class=" " data-bs-toggle="dropdown" >
                 <UserPicture :width="3" :height="3" :imgSrc="renderImg" />
             </div>
