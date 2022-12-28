@@ -52,6 +52,7 @@ export default defineComponent({
     color: white;
 }
 .navigation-bar {
+  z-index: 99;
   position: fixed; // caused of bug in dropdown
   right: 0;
   top: 0;
