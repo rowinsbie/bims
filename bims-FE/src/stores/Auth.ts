@@ -12,6 +12,7 @@ interface APIResponse {
     status?:BigInteger
 }
 
+/* A store that is used to manage the authentication of the user. */
 export const useAuthManagement = defineStore('Auth',{
     state: () => ({
         userData: {

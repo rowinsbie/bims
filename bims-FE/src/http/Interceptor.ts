@@ -1,9 +1,10 @@
 import type { AxiosRequestConfig } from "axios";
 import http from "./Http";
 import HttpHandler from "./HttpHandler";
+
 /**
- * This method will Intercept all the http request throughout the application,
- * and put the intercepted http code as a parameter for the method HttpHandler
+ * Interceptors is a function that intercepts the request and response of the http object and handles
+ * the errors.
  */
 export default function Interceptors() {
     http.interceptors.request.use((config:AxiosRequestConfig) => {

@@ -2,10 +2,9 @@ import Swal from 'sweetalert2'
 import { useAuthManagement } from '@/stores/Auth';
 
 /**
- * This method will translate the http code messages
- * In a form where users would have better understanding on what is going on while using the application
- * @param http_code 
- * @returns SweetAlert with message for the user
+ * It's a function that handles the HTTP response codes and displays a message to the user based on the
+ * HTTP response code.
+ * @param {number} http_code - The http code that you want to handle
  */
 export default function HttpHandler(http_code:number) {
     let HttpTitle:string = "Network Error";
