@@ -1,6 +1,10 @@
 import type { AxiosRequestConfig } from "axios";
 import http from "./Http";
-import { useAuthManagement } from '@/stores/Auth';
+import HttpHandler from "./HttpHandler";
+/**
+ * This method will Intercept all the http request throughout the application,
+ * and put the intercepted http code as a parameter for the method HttpHandler
+ */
 export default function Interceptors() {
     http.interceptors.request.use((config:AxiosRequestConfig) => {
         return config;
@@ -13,8 +17,9 @@ export default function Interceptors() {
        
         return response;
     },(error) => {
-        if(error.response && error.response.status == 401) {
-            useAuthManagement().SignOut();  
+        // http handler
+        if(error.response && error.response.status) {
+            HttpHandler(error.response.status);
         }
         return Promise.reject(error);
     });
