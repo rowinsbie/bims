@@ -9,6 +9,7 @@ import LogsView from '../views/auth/LogsView.vue';
 import AdminView from '../views/auth/AdminView.vue';
 import NotFoundView from '../views/auth/NotFoundView.vue';
 
+/* Creating a router object that is used to navigate between pages. */
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -81,10 +82,11 @@ const router = createRouter({
     ],
 });
 
+/* A router guard that checks if the user is authenticated before accessing the route. */
 router.beforeEach((to:RouteLocationNormalized,from:RouteLocationNormalized,next:Function) => {
     const isAuthenticated = localStorage.getItem('token');
-    if((to.name !== 'login' && to.meta.requiresAuth) && !isAuthenticated) next({name:'login'}) // check if authenticated
-    else if(isAuthenticated && to.name == 'login') next({name:'dashboard'})  // redirect to dashboard if authenticated and going on route login
+    if((to.name !== 'login' && to.meta.requiresAuth) && !isAuthenticated) next({name:'login'}) 
+    else if(isAuthenticated && to.name == 'login') next({name:'dashboard'})  
     else next();
 });
 
