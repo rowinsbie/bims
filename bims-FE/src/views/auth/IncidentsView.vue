@@ -1,6 +1,5 @@
 <template>
     <LayOut>
-       <ProgressIndicator />
     </LayOut>
 </template>
 
