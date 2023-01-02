@@ -49,7 +49,7 @@ export default defineComponent({
         top: 0;
         left: 0;
         height: 100%;
-        width: 250px;
+        width: 250px !important;
         background: rgb(255, 255, 255);
         border-right: 1px solid rgb(245, 245, 245);
         z-index: 100;
