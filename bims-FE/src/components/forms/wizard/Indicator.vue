@@ -3,9 +3,12 @@
         <div class="icon">
             <font-awesome-icon class="pending" icon="fa-solid fa-circle-check" />
         </div>
-        <div class="label pending">
-           {{title}}
+        <div class="label-pending">
+           {{title}}  
         </div>
+        
+               <span class=" btn-success">{{stepIndex}}</span> 
+        
     </div>
 </template>
 
@@ -15,7 +18,9 @@ import  { defineComponent } from 'vue';
 export default defineComponent({
     props:{
         title:String,
-        icon:String
+        icon:String,
+        key:Number,
+        stepIndex:Number
     }
 });
 </script>
@@ -26,7 +31,7 @@ export default defineComponent({
         padding: 1rem 1rem;
         display: flex;
         gap: 10px;
-     
+        max-width: 100% !important;
 
     }
 </style>

@@ -1,8 +1,7 @@
 <template>
     <div class="progress-container">
-       <Indicator title="Resident Information" />
-       <Indicator title="Address" />
-       <Indicator title="Family Information" />
+       <Indicator v-for="(step,index) in steps" :stepIndex="index" :key="index" :title="step.title" :class="[active == index ? 'bg-active' : 'bg-dark text-inactive',steps[active].isValid == true ? 'bg-success':'']" />
+      
     </div>
 </template>
 
@@ -10,6 +9,10 @@
 import  { defineComponent } from 'vue';
 import Indicator from './Indicator.vue';
 export default defineComponent({
+    props:[
+        'steps',
+        'active'
+    ],
     components:{
         Indicator
     }
@@ -19,10 +22,16 @@ export default defineComponent({
 <style lang="scss">
     .progress-container {
         position: relative;
-        width: 95% !important;
+        max-width: 100% !important;
         background-color: black;
         display: flex;
-        margin-left: 10px;
-        border-radius: 20px 20px 0px 0px;
+        
+    }
+
+    .text-inactive {
+        color: rgb(128, 128, 128);
+    }
+    .bg-active {
+        background: rgb(233, 95, 71);
     }
 </style>
