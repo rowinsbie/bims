@@ -1,13 +1,13 @@
 <template>
    <div>
-    <ProgressIndicator :steps="steps" :active="activeStepIndex" />
+    <ProgressIndicator :steps="steps"  :active="activeStepIndex" />
    
             <form @submit.prevent="nextStep">
                 <div class="card">
                     <div class="card-body">
-                        <div v-for="(step,index) in steps"  :key="index" :id="'step'+(index)" v-show="activeStepIndex == index" class="step-content">
+                        <div v-for="(step,index) in steps"  :key="index" :id="'step'+(index+1)" v-show="activeStepIndex == index" class="step-content">
                             <slot :name="'headerPage'+(index+1)"></slot>
-                            <slot :name="'step'+(index)"></slot>
+                            <slot :name="'step'+(index+1)"></slot>
                         </div>
                        
                         <!-- footer with actions of the multi step form -->
@@ -42,12 +42,16 @@ export default defineComponent({
             activeStepIndex:0,
         }
     },
+    mounted() {
+       
+    },
     methods:{
         nextStep(){
             if(!this.steps[this.activeStepIndex].isValid) {
                 this.$emit('validateStep',this.activeStepIndex);
                 return false;
             }
+
             let isFinalStep = ((this.activeStepIndex+1) == this.steps.length);
              if(isFinalStep) {
                 this.$emit('onComplete');
@@ -63,8 +67,8 @@ export default defineComponent({
 
         },
         prevStep() {
-            
-            if(this.steps[this.activeStepIndex-1]) {
+
+            if(this.steps[this.activeStepIndex]) {
                 this.activeStepIndex--;
             }
           
