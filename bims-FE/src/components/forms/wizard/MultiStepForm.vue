@@ -50,7 +50,7 @@ export default defineComponent({
             if(!this.steps[this.activeStepIndex].isValid) {
                 this.$emit('validateStep',this.activeStepIndex);
                 return false;
-            }
+            } 
 
             let isFinalStep = ((this.activeStepIndex+1) == this.steps.length);
              if(isFinalStep) {
@@ -69,6 +69,7 @@ export default defineComponent({
         prevStep() {
 
             if(this.steps[this.activeStepIndex]) {
+                this.steps[this.activeStepIndex-1].isValid = false;
                 this.activeStepIndex--;
             }
           
