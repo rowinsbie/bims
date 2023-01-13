@@ -1,51 +1,63 @@
 <template>
-    <div class="indicator-container" :class="[activeTab == stepIndex ? 'bg-active': isValid ? 'bg-validated ':'']">
-        <div class="icon">  
-            <font-awesome-icon v-if="activeTab == stepIndex" icon="fa-solid fa-file-pen" />
-            <font-awesome-icon v-else-if="activeTab !== stepIndex && !isValid" icon="fa-solid fa-file-circle-exclamation" />
-            <font-awesome-icon  v-else="isValid && activeTab !== stepIndex" icon="fa-solid fa-file-circle-check" />
+    <div class='p-1 mr-3 mb-3 '>
+        <!-- <div :class="[currentStep == tabIndex ? 'bg-warning ': currentStep > 0 && tabIndex < currentStep ? 'bg-validated' : 'bg-dark' ]" > -->
+        <div :class="['step-info container',currentStep == tabIndex ? 'current-active': currentStep > 0 && tabIndex < currentStep ? 'validated' : 'default-step' ]">  
+       
+           {{stepDetail[tabIndex].label}}
         </div>
-            <div class="label-pending">
-           {{title}}  
-        </div>        
+            
+        <!-- </div> -->
     </div>
 </template>
+<script setup lang="ts">
+import { computed, inject } from 'vue';
+const stepDetail = inject('STEP_INFO');
 
+
+</script>
 <script  lang="ts">
 import  { defineComponent } from 'vue';
 
 export default defineComponent({
-    props:{
-        title:String,
-        icon:String,
-        key:Number,
-        stepIndex:Number,
-        isValid:Boolean,
-        activeTab:Number
-    }
+    props:[
+        'tabIndex',
+        'currentStep',
+        'isValid',
+        'validationSchema'
+    ]
 });
 </script>
 
 <style lang="scss">
     .indicator-container {
         color: white;
-        padding: 1rem 1rem;
         display: flex;
         gap: 10px;
         max-width: 100% !important;
-
+        height:auto;
+       
     }
 
-    .text-inactive {
-        color: rgb(128, 128, 128);
+    .step-info {
+        display:flex !important;
+        color:black;
+        border-style:solid;
+        border-width: 0px 0em 3px 0;
     }
-    .bg-active {
-        background: rgb(233, 95, 71);
+
+    .default-step {
+         border-color:#f2f2f2;
     }
-    .bg-validated {
-        background-color: rgb(0, 136, 72);
-        border-width: 0px 3px 0px 0px;
-        border-style: solid;
-        border-color: rgb(0, 61, 38);
+
+    .validated {
+        border-color:#198754;
     }
+
+    .current-active {
+        border-color:#09689c;
+    }
+
+    
+
+ 
 </style>
