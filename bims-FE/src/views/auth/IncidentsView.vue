@@ -3,34 +3,34 @@ import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import FormWizard from "@/components/forms/wizard/MultiStepForm.vue";
 import FormStep from "@/components/forms/wizard/FormStep.vue";
-import { provide } from 'vue';
+import { provide } from "vue";
 
 const stepDetails = [
     {
         label: "Resident Information",
     },
     {
-        label: "Account Setup",
+        label: "Contact Information",
     },
-      {
-        label: "Sample form",
+    {
+        label: "Address Information",
     },
 ];
 
-provide('STEP_INFO',stepDetails);
+provide("STEP_INFO", stepDetails);
 
 // break down the validation steps into multiple schemas
 const validationSchema = [
     yup.object({
-        fullName: yup.string().required().label("Full Name"),
-        email: yup.string().required().email().label("Email Address"),
+        firstName: yup.string().required().label("First Name"),
+        middleName: yup.string().label("Middle Name"),
+        lastName: yup.string().required().label("Last Name"),
+        birthDate: yup.date().required().label("Birth Date"),
+        gender: yup.string().required().label("Gender"),
     }),
     yup.object({
-        password: yup.string().min(8).required(),
-        confirmPass: yup
-            .string()
-            .required()
-            .oneOf([yup.ref("password")], "Passwords must match"),
+        contactNo: yup.number().required().label("Contact No."),
+        email: yup.string().email().label("Email"),
     }),
     yup.object({
         favoriteDrink: yup
@@ -68,49 +68,147 @@ export default defineComponent({
                 :validation-schema="validationSchema"
                 @submit="onSubmit"
                 :stepDetail="stepDetails"
+                class="container"
             >
-                <FormStep>
-                    <Field
-                        name="fullName"
-                        type="text"
-                        class="form-control"
-                        placeholder="Type your Full name"
-                    />
-                    <ErrorMessage name="fullName" />
+                <FormStep class="container">
+                    <div class="row">
+                        <div class="col-lg-4 mt-2">
+                            <label for="firstName">First Name</label>
+                            <Field
+                                name="firstName"
+                                type="text"
+                                class="form-control"
+                                placeholder="First Name"
+                            />
+                            <ErrorMessage
+                                class="text-danger"
+                                name="firstName"
+                            />
+                        </div>
 
-                    <Field
-                        name="email"
-                        type="email"
-                        class="form-control"
-                        placeholder="Type your email"
-                    />
-                    <ErrorMessage name="email" />
+                        <div class="col-lg-4 mt-2">
+                            <label for="middleName">Middle Name</label>
+                            <Field
+                                name="middleName"
+                                type="text"
+                                class="form-control"
+                                placeholder="Middle Name"
+                            />
+                        </div>
+
+                        <div class="col-lg-4 mt-2">
+                            <label for="lastName">Last Name</label>
+                            <Field
+                                name="lastName"
+                                type="text"
+                                class="form-control"
+                                placeholder="Last Name"
+                            />
+                            <ErrorMessage class="text-danger" name="lastName" />
+                        </div>
+
+                        <div class="col-lg-4 mt-2">
+                            <label for="birthDate">Birth Name</label>
+                            <Field
+                                name="birthDate"
+                                type="date"
+                                class="form-control"
+                            />
+                            <ErrorMessage
+                                class="text-danger"
+                                name="birthDate"
+                            />
+                        </div>
+
+                        <div class="col-lg-4 mt-2">
+                            <label for="gender">Gender</label>
+                            <Field
+                                name="gender"
+                                as="select"
+                                class="form-control"
+                            >
+                                <option>Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </Field>
+                            <ErrorMessage class="text-danger" name="gender" />
+                        </div>
+                    </div>
                 </FormStep>
 
-                <FormStep>
-                    <Field
-                        name="password"
-                        type="password"
-                        placeholder="Type a strong one"
-                    />
-                    <ErrorMessage name="password" />
+                <FormStep class="container">
+                    <div class="row">
+                        <div class="col-lg-4 mt-2">
+                            <label for="contactNo">Contact No.</label>
+                            <Field
+                                name="contactNo"
+                                type="number"
+                                class="form-control"
+                            />
+                            <ErrorMessage
+                                class="text-danger"
+                                name="contactNo"
+                            />
+                        </div>
 
-                    <Field
-                        name="confirmPass"
-                        type="password"
-                        placeholder="Confirm your password"
-                    />
-                    <ErrorMessage name="confirmPass" />
+                        <div class="col-lg-4 mt-2">
+                            <label for="email">Email</label>
+                            <Field
+                                name="email"
+                                type="text"
+                                class="form-control"
+                            />
+                            <ErrorMessage class="text-danger" name="email" />
+                        </div>
+                    </div>
                 </FormStep>
 
-                <FormStep>
-                    <Field name="favoriteDrink" as="select">
-                        <option>Select a drink</option>
-                        <option value="coffee">Coffee</option>
-                        <option value="tea">Tea</option>
-                        <option value="soda">Soda</option>
-                    </Field>
-                    <ErrorMessage name="favoriteDrink" />
+                <FormStep class="container">
+                    <div class="row">
+                        <div class="col-lg-4 mt-2">
+                            <label for="province">Province</label>
+                            <Field
+                                name="province"
+                                as="select"
+                                class="form-control"
+                            >
+                                <option>Select province</option>
+                            </Field>
+                            <ErrorMessage class="text-danger" name="province" />
+                        </div>
+
+                        <div class="col-lg-4 mt-2">
+                            <label for="cityMun">City/Municipality</label>
+                            <Field
+                                name="cityMun"
+                                as="select"
+                                class="form-control"
+                            >
+                                <option>Select City/Municipality</option>
+                            </Field>
+                            <ErrorMessage class="text-danger" name="cityMun" />
+                        </div>
+
+                        <div class="col-lg-4 mt-2">
+                            <label for="brgy">Barangay</label>
+                            <Field name="brgy" as="select" class="form-control">
+                                <option>Select Barangay</option>
+                            </Field>
+                            <ErrorMessage class="text-danger" name="brgy" />
+                        </div>
+                    </div>
+                    <div class="row">
+                     <div class="col-lg-12 mt-2">
+                            <label for="address">Address</label>
+                            <Field
+                                name="address"
+                                type="text"
+                                class="form-control"
+                                placeholder="Enter Room/Floor/Unit No. , Bldg. Name, House Lot/Block, Street , Subdivision"
+                            />
+                            <ErrorMessage class="text-danger" name="address" />
+                        </div>
+                    </div>
                 </FormStep>
             </FormWizard>
         </div>

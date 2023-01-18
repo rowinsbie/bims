@@ -8,7 +8,7 @@
     </div>
     <slot />
 
-    <div class="mt-2">
+    <div class="mt-2 text-end">
       <button v-if="hasPrevious" class="btn border " type="button" @click="goToPrev">
         Previous
       </button>

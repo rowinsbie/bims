@@ -42,7 +42,7 @@ export default defineComponent({
         display:flex !important;
         color:black;
         border-style:solid;
-        border-width: 0px 0em 3px 0;
+        border-width: 0px 0em 5px 0;
     }
 
     .default-step {
