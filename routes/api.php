@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\AuthenticationController;
 use App\Http\Controllers\API\Admin\ResidentManagementAPIController;
+use App\Http\Controllers\API\PHAddressAPIController;
 
 
 /*
@@ -19,6 +20,7 @@ use App\Http\Controllers\API\Admin\ResidentManagementAPIController;
 
 
 
+
 Route::middleware(['auth:sanctum'])->group(function() {
     
     // Resident management API Calls
@@ -31,8 +33,14 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('sign-out',[AuthenticationController::class,'SignOut']);
 
 
-
 });
 
 Route::post('authenticate',[AuthenticationController::class,'Authenticate']);
+
+// address API
+Route::get('region-list',[PHAddressAPIController::class,'getRegionList']);
+Route::get('province-list/{id}',[PHAddressAPIController::class,'getProvince']);
+Route::get('citymunicipality-list/{id}',[PHAddressAPIController::class,'getCityOrMunicipality']);
+Route::get('barangay-list/{id}',[PHAddressAPIController::class,'getBarangay']);
+
 
