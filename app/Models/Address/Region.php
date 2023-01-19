@@ -5,9 +5,9 @@ namespace App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Province extends Model
+class Region extends Model
 {
     use HasFactory;
-    protected $table = "refprovince";
+    protected $table = "refregion";
 
 }

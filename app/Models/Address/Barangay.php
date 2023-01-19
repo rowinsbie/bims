@@ -9,6 +9,4 @@ class Barangay extends Model
 {
     use HasFactory;
     protected $table = "refbrgy";
-    protected $primaryKey = "brgyCode";
-
 }

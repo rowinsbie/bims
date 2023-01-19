@@ -9,6 +9,5 @@ class CityMunicipality extends Model
 {
     use HasFactory;
     protected $table = "refcitymun";
-    protected $primaryKey = "citymunCode";
 
 }
