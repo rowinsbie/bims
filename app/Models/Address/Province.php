@@ -9,5 +9,7 @@ class Province extends Model
 {
     use HasFactory;
     protected $table = "refprovince";
+    protected $primaryKey = "provCode";
 
+    
 }

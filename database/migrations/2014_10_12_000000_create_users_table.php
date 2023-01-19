@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('contact_no');
             $table->string('email')->unique();
             $table->boolean('isPWD');
+            $table->string('vital_status')->default('Alive')->comment('Alive or Deceased');
             $table->String('resident_number');
             $table->string('password');
             $table->string('picture')->nullable();
