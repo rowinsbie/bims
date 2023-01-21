@@ -10,4 +10,8 @@ class ResidentAddress extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function Region() {
+        return $this->belongsTo(Region::class,'regCode','region_id');
+    }
 }

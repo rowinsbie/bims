@@ -8,12 +8,13 @@ use App\Models\Address\Region;
 use App\Models\Address\Province;
 use App\Models\Address\CityMunicipality;
 use App\Models\Address\Barangay;
+use App\Models\ResidentAddress;
 
 
 class PHAddressAPIController extends Controller
 {
     public function getRegionList() {
-        return Region::all();
+        return ResidentAddress::with(['Region'])->get();
     }
 
     public function getProvince(Request $request) {

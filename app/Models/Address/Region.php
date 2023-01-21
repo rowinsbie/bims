@@ -18,6 +18,8 @@ class Region extends Model
         return $this->hasMany(CityMunicipality::class,'regDesc','regCode');
     }
 
-   
+    public function Address() {
+        return $this->hasMany(ResidentAddress::class,'region_id','regCode');
+    }
 
 }
