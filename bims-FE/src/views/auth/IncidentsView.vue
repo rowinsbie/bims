@@ -59,11 +59,13 @@ function onSubmit(formData) {
 import { defineComponent } from "vue";
 import LayOut from "@/components/layout/LayOut.vue";
 import { AddressAPI } from "@/stores/Address";
+import { DisabilitiesAPI } from "@/stores/Disabilities";
 
 export default defineComponent({
     data() {
         return {
             Address: AddressAPI(),
+            Disabilities:DisabilitiesAPI(),
             formData: {
                 isPWD:false,
                 Region: null,
@@ -77,6 +79,7 @@ export default defineComponent({
     },
     mounted() {
         this.Address.GET_REGIONS();
+        this.Disabilities.SHOW_LIST();
     },
     methods: {
         getProvince() {
@@ -105,6 +108,9 @@ export default defineComponent({
         listOfBarangay() {
             return this.Address.LIST_OF_BARANGAY;
         },
+        listOfDisabilities() {
+            return this.Disabilities.GET_LIST;
+        }
     },
 });
 </script>
@@ -215,8 +221,10 @@ export default defineComponent({
                                 class="form-control"
                             >
                                 <option>Select disabilities</option>
-                                <option value="Deaf">Deaf</option>
-                                <option value="Blind">Blind</option>
+                                <option v-for="(value,index) in listOfDisabilities.data" :key="index" :value="value.id">
+                                    {{value.disabilityDesc}}
+                                </option>
+                               
                             </Field>
                                                          <ErrorMessage class="text-danger" name="disabilities" />
 
