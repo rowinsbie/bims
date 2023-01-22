@@ -5,7 +5,6 @@ import FormWizard from "@/components/forms/wizard/MultiStepForm.vue";
 import FormStep from "@/components/forms/wizard/FormStep.vue";
 import { provide } from "vue";
 
-
 const stepDetails = [
     {
         label: "Resident Information",
@@ -28,17 +27,23 @@ const validationSchema = [
         lastName: yup.string().required().label("Last Name"),
         birthDate: yup.date().required().label("Birth Date"),
         gender: yup.string().required().label("Gender"),
+        isPWD: yup.boolean().required("Tell us, is this a person with disabilities?"),
+        disabilities: yup.string().when('isPWD',{
+            is:true,
+            then:yup.string().required("Please select the disabilities").label('Disabilities')
+        })
+
     }),
     yup.object({
         contactNo: yup.number().required().label("Contact No."),
         email: yup.string().email().label("Email"),
     }),
     yup.object({
-        region:yup.string().required().label('Region').nullable(),
-        province:yup.string().required().label('Region').nullable(),
-        cityMun:yup.string().required().label('City/Municipality').nullable(),
-        brgy:yup.string().required().label('Barangay').nullable(),
-        address:yup.string().required().label('Address').nullable()
+        region: yup.string().required().label("Region").nullable(),
+        province: yup.string().required().label("Region").nullable(),
+        cityMun: yup.string().required().label("City/Municipality").nullable(),
+        brgy: yup.string().required().label("Barangay").nullable(),
+        address: yup.string().required().label("Address").nullable(),
     }),
 ];
 
@@ -50,21 +55,20 @@ function onSubmit(formData) {
 }
 </script>
 
-
-
 <script lang="ts">
 import { defineComponent } from "vue";
 import LayOut from "@/components/layout/LayOut.vue";
-import {AddressAPI} from "@/stores/Address";
+import { AddressAPI } from "@/stores/Address";
 
 export default defineComponent({
     data() {
         return {
             Address: AddressAPI(),
             formData: {
-                Region:null,
-                Province:null,
-                CityMunicipality:null
+                isPWD:false,
+                Region: null,
+                Province: null,
+                CityMunicipality: null,
             },
         };
     },
@@ -72,27 +76,25 @@ export default defineComponent({
         LayOut,
     },
     mounted() {
-        
         this.Address.GET_REGIONS();
-        
     },
-    methods:{
-        getProvince(){
-            if(this.formData.Region !== null) {
+    methods: {
+        getProvince() {
+            if (this.formData.Region !== null) {
                 this.Address.GET_PROVINCE(this.formData.Region);
             }
         },
         getMunicipality() {
-            this.Address.GET_CITYMUNICIPALITY(this.formData.Province); 
+            this.Address.GET_CITYMUNICIPALITY(this.formData.Province);
         },
         getBarangay() {
             this.Address.GET_BARANGAY(this.formData.CityMunicipality);
-        }
+        },
+       
     },
-    computed:{
+    computed: {
         listTheRegions() {
-            return this.Address.LIST_OF_REGIONS
-            
+            return this.Address.LIST_OF_REGIONS;
         },
         listOfProvince() {
             return this.Address.LIST_OF_PROVINCE;
@@ -102,8 +104,8 @@ export default defineComponent({
         },
         listOfBarangay() {
             return this.Address.LIST_OF_BARANGAY;
-        }
-    }
+        },
+    },
 });
 </script>
 <template>
@@ -132,7 +134,9 @@ export default defineComponent({
                         </div>
 
                         <div class="col-lg-4 mt-2">
-                            <label for="middleName">Middle Name (Optional)</label>
+                            <label for="middleName"
+                                >Middle Name (Optional)</label
+                            >
                             <Field
                                 name="middleName"
                                 type="text"
@@ -178,6 +182,48 @@ export default defineComponent({
                             </Field>
                             <ErrorMessage class="text-danger" name="gender" />
                         </div>
+                        <div
+                            class="col-lg-4 mt-2  pt-2 pb-2 pl-4 pr-4 text-center"
+                        >
+                        
+                            <div class="flex">
+                              <p>is PWD (person with disability) ?</p>
+                                <div class="flex">
+                                    <Field
+                                        name="isPWD"
+                                        type="radio"
+                                        :value="true"
+                                        v-model="formData.isPWD"
+                                    />
+                                    <span>Yes</span>
+                                </div>
+
+                                <div class="flex">
+                                    <Field
+                                        name="isPWD"
+                                        type="radio"
+                                        :value="false"
+                                        v-model="formData.isPWD"
+                                    />
+                                    <span>No</span>
+                                </div>
+                            </div>
+                             <div v-if="formData.isPWD">
+                                 <Field
+                                name="disabilities"
+                                as="select"
+                                class="form-control"
+                            >
+                                <option>Select disabilities</option>
+                                <option value="Deaf">Deaf</option>
+                                <option value="Blind">Blind</option>
+                            </Field>
+                                                         <ErrorMessage class="text-danger" name="disabilities" />
+
+                             </div>
+                                                         <ErrorMessage class="text-danger" name="isPWD" />
+
+                        </div>
                     </div>
                 </FormStep>
 
@@ -220,14 +266,20 @@ export default defineComponent({
                                 @change="getProvince()"
                             >
                                 <option>Select Region</option>
-                                <option  v-for="(value,index) in listTheRegions.data" :key="index" :value="value.regCode">
-                                {{value.regDesc}}
+                                <option
+                                    v-for="(
+                                        value, index
+                                    ) in listTheRegions.data"
+                                    :key="index"
+                                    :value="value.regCode"
+                                >
+                                    {{ value.regDesc }}
                                 </option>
                             </Field>
                             <ErrorMessage class="text-danger" name="region" />
                         </div>
 
-                          <div class="col-lg-4 mt-2">
+                        <div class="col-lg-4 mt-2">
                             <label for="province">Province</label>
                             <Field
                                 name="province"
@@ -237,8 +289,15 @@ export default defineComponent({
                                 @change="getMunicipality()"
                             >
                                 <option>Select Province</option>
-                                <option v-if="listOfProvince.data" v-for="(value,index) in listOfProvince.data" :key="index" :value="value.provCode">
-                                    {{value.provDesc}}
+                                <option
+                                    v-if="listOfProvince.data"
+                                    v-for="(
+                                        value, index
+                                    ) in listOfProvince.data"
+                                    :key="index"
+                                    :value="value.provCode"
+                                >
+                                    {{ value.provDesc }}
                                 </option>
                             </Field>
                             <ErrorMessage class="text-danger" name="province" />
@@ -254,8 +313,15 @@ export default defineComponent({
                                 @change="getBarangay()"
                             >
                                 <option>Select City/Municipality</option>
-                                <option v-if="listOfCityMunicipality.data" v-for="(value,index) in listOfCityMunicipality.data" :key="index" :value="value.citymunCode">
-                                    {{value.citymunDesc}}
+                                <option
+                                    v-if="listOfCityMunicipality.data"
+                                    v-for="(
+                                        value, index
+                                    ) in listOfCityMunicipality.data"
+                                    :key="index"
+                                    :value="value.citymunCode"
+                                >
+                                    {{ value.citymunDesc }}
                                 </option>
                             </Field>
                             <ErrorMessage class="text-danger" name="cityMun" />
@@ -265,15 +331,22 @@ export default defineComponent({
                             <label for="brgy">Barangay</label>
                             <Field name="brgy" as="select" class="form-control">
                                 <option>Select Barangay</option>
-                                 <option v-if="listOfBarangay.data" v-for="(value,index) in listOfBarangay.data" :key="index" :value="value.brgyCode">
-                                    {{value.brgyDesc}}
+                                <option
+                                    v-if="listOfBarangay.data"
+                                    v-for="(
+                                        value, index
+                                    ) in listOfBarangay.data"
+                                    :key="index"
+                                    :value="value.brgyCode"
+                                >
+                                    {{ value.brgyDesc }}
                                 </option>
                             </Field>
                             <ErrorMessage class="text-danger" name="brgy" />
                         </div>
                     </div>
                     <div class="row">
-                     <div class="col-lg-12 mt-2">
+                        <div class="col-lg-12 mt-2">
                             <label for="address">Address</label>
                             <Field
                                 name="address"

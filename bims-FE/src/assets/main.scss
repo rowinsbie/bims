@@ -7,7 +7,12 @@
     border-radius: 20px 20px 20px 20px;
 }
 
-
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
 
 @media screen and (max-width: $xsAndsm),
 screen and (max-width:$xsAndsm) {
