@@ -14,7 +14,7 @@ use App\Models\ResidentAddress;
 class PHAddressAPIController extends Controller
 {
     public function getRegionList() {
-        return ResidentAddress::with(['Region'])->get();
+        return Region::all();
     }
 
     public function getProvince(Request $request) {
