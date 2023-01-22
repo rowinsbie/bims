@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\AuthenticationController;
 use App\Http\Controllers\API\Admin\ResidentManagementAPIController;
 use App\Http\Controllers\API\PHAddressAPIController;
-
+use App\Http\Controllers\API\PWDController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,6 @@ Route::middleware(['auth:sanctum'])->group(function() {
     
     // Resident management API Calls
     Route::apiResource('resident-management',ResidentManagementAPIController::class);
-
     
     Route::get('/user',function(Request $request) {
         return $request->user();
@@ -36,6 +35,10 @@ Route::middleware(['auth:sanctum'])->group(function() {
 });
 
 Route::post('authenticate',[AuthenticationController::class,'Authenticate']);
+
+// temporary here
+Route::apiResource('disabilities',PWDController::class);
+
 
 // address API
 Route::get('region-list',[PHAddressAPIController::class,'getRegionList']);
