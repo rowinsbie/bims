@@ -22,21 +22,29 @@ provide("STEP_INFO", stepDetails);
 // break down the validation steps into multiple schemas
 const validationSchema = [
     yup.object({
-        firstName: yup.string().required().label("First Name"),
-        middleName: yup.string().label("Middle Name"),
-        lastName: yup.string().required().label("Last Name"),
-        birthDate: yup.date().required().label("Birth Date"),
-        gender: yup.string().required().label("Gender"),
-        isPWD: yup.boolean().required("Tell us, is this a person with disabilities?"),
-        disabilities: yup.string().when('isPWD',{
-            is:true,
-            then:yup.string().required("Please select the disabilities").label('Disabilities')
-        })
-
+        first_name: yup.string().required().label("First Name").nullable(),
+        middle_name: yup.string().label("Middle Name").nullable(),
+        last_name: yup.string().required().label("Last Name").nullable(),
+        birthdate: yup.date().required().label("Birth Date").nullable(),
+        gender: yup.string().required().label("Gender").nullable(),
+        isPWD: yup
+            .boolean()
+            .required("Tell us, is this a person with disabilities?"),
+        disabilities: yup.string().when("isPWD", {
+            is: true,
+            then: yup
+                .string()
+                .required("Please select the disabilities")
+                .label("Disabilities").nullable(),
+        }),
     }),
     yup.object({
-        contactNo: yup.number().required().label("Contact No."),
-        email: yup.string().email().label("Email"),
+        contact_no: yup
+            .string()
+            .required()
+            .matches(new RegExp("^[0-9]{11,11}$"),"Please enter a valid mobile number")
+            .label("Contact No.").nullable(),
+        email: yup.string().email().label("Email").nullable(),
     }),
     yup.object({
         region: yup.string().required().label("Region").nullable(),
@@ -51,7 +59,7 @@ const validationSchema = [
  * Only Called when the last step is submitted
  */
 function onSubmit(formData) {
-    console.log(JSON.stringify(formData, null, 2));
+    console.table(JSON.stringify(formData, null, 2));
 }
 </script>
 
@@ -65,12 +73,24 @@ export default defineComponent({
     data() {
         return {
             Address: AddressAPI(),
-            Disabilities:DisabilitiesAPI(),
+            Disabilities: DisabilitiesAPI(),
             formData: {
-                isPWD:false,
-                Region: null,
-                Province: null,
-                CityMunicipality: null,
+                firstName: null,
+                middleName: null,
+                lastName: null,
+                gender: null,
+                birthDate: null,
+                isPWD: false,
+                disabilities:null,
+                contactNo: null,
+                email: null,
+                addressTo:{
+                    Region: null,
+                    Province: null,
+                    CityMunicipality: null,
+                    barangay:null,
+                    address:null
+                }
             },
         };
     },
@@ -83,17 +103,16 @@ export default defineComponent({
     },
     methods: {
         getProvince() {
-            if (this.formData.Region !== null) {
-                this.Address.GET_PROVINCE(this.formData.Region);
+            if (this.formData.addressTo.Region !== null) {
+                this.Address.GET_PROVINCE(this.formData.addressTo.Region);
             }
         },
         getMunicipality() {
-            this.Address.GET_CITYMUNICIPALITY(this.formData.Province);
+            this.Address.GET_CITYMUNICIPALITY(this.formData.addressTo.Province);
         },
         getBarangay() {
-            this.Address.GET_BARANGAY(this.formData.CityMunicipality);
+            this.Address.GET_BARANGAY(this.formData.addressTo.CityMunicipality);
         },
-       
     },
     computed: {
         listTheRegions() {
@@ -110,7 +129,7 @@ export default defineComponent({
         },
         listOfDisabilities() {
             return this.Disabilities.GET_LIST;
-        }
+        },
     },
 });
 </script>
@@ -128,14 +147,15 @@ export default defineComponent({
                         <div class="col-lg-4 mt-2">
                             <label for="firstName">First Name</label>
                             <Field
-                                name="firstName"
+                                name="first_name"
                                 type="text"
                                 class="form-control"
                                 placeholder="First Name"
+                                v-model="formData.firstName"
                             />
                             <ErrorMessage
                                 class="text-danger"
-                                name="firstName"
+                                name="first_name"
                             />
                         </div>
 
@@ -144,34 +164,37 @@ export default defineComponent({
                                 >Middle Name (Optional)</label
                             >
                             <Field
-                                name="middleName"
+                                name="middle_name"
                                 type="text"
                                 class="form-control"
                                 placeholder="Middle Name"
+                                 v-model="formData.middleName"
                             />
                         </div>
 
                         <div class="col-lg-4 mt-2">
                             <label for="lastName">Last Name</label>
                             <Field
-                                name="lastName"
+                                name="last_name"
                                 type="text"
                                 class="form-control"
                                 placeholder="Last Name"
+                                 v-model="formData.lastName"
                             />
-                            <ErrorMessage class="text-danger" name="lastName" />
+                            <ErrorMessage class="text-danger" name="last_name" />
                         </div>
 
                         <div class="col-lg-4 mt-2">
-                            <label for="birthDate">Birth Name</label>
+                            <label for="birthDate">Birth Date</label>
                             <Field
-                                name="birthDate"
+                                name="birthdate"
                                 type="date"
                                 class="form-control"
+                                 v-model="formData.birthDate"
                             />
                             <ErrorMessage
                                 class="text-danger"
-                                name="birthDate"
+                                name="birthdate"
                             />
                         </div>
 
@@ -181,6 +204,7 @@ export default defineComponent({
                                 name="gender"
                                 as="select"
                                 class="form-control"
+                                 v-model="formData.gender"
                             >
                                 <option>Select gender</option>
                                 <option value="Male">Male</option>
@@ -189,11 +213,10 @@ export default defineComponent({
                             <ErrorMessage class="text-danger" name="gender" />
                         </div>
                         <div
-                            class="col-lg-4 mt-2  pt-2 pb-2 pl-4 pr-4 text-center"
+                            class="col-lg-4 mt-2 pt-2 pb-2 pl-4 pr-4 text-center"
                         >
-                        
                             <div class="flex">
-                              <p>is PWD (person with disability) ?</p>
+                                <p>is PWD (person with disability) ?</p>
                                 <div class="flex">
                                     <Field
                                         name="isPWD"
@@ -214,23 +237,30 @@ export default defineComponent({
                                     <span>No</span>
                                 </div>
                             </div>
-                             <div v-if="formData.isPWD">
-                                 <Field
-                                name="disabilities"
-                                as="select"
-                                class="form-control"
-                            >
-                                <option>Select disabilities</option>
-                                <option v-for="(value,index) in listOfDisabilities.data" :key="index" :value="value.id">
-                                    {{value.disabilityDesc}}
-                                </option>
-                               
-                            </Field>
-                                                         <ErrorMessage class="text-danger" name="disabilities" />
-
-                             </div>
-                                                         <ErrorMessage class="text-danger" name="isPWD" />
-
+                            <div v-if="formData.isPWD">
+                                <Field
+                                    name="disabilities"
+                                    as="select"
+                                    class="form-control"
+                                     v-model="formData.disabilities"
+                                >
+                                    <option>Select disabilities</option>
+                                    <option
+                                        v-for="(
+                                            value, index
+                                        ) in listOfDisabilities.data"
+                                        :key="index"
+                                        :value="value.id"
+                                    >
+                                        {{ value.disabilityDesc }}
+                                    </option>
+                                </Field>
+                                <ErrorMessage
+                                    class="text-danger"
+                                    name="disabilities"
+                                />
+                            </div>
+                            <ErrorMessage class="text-danger" name="isPWD" />
                         </div>
                     </div>
                 </FormStep>
@@ -240,13 +270,14 @@ export default defineComponent({
                         <div class="col-lg-4 mt-2">
                             <label for="contactNo">Contact No.</label>
                             <Field
-                                name="contactNo"
-                                type="number"
+                                name="contact_no"
+                                type="text"
                                 class="form-control"
+                                 v-model="formData.contactNo"
                             />
                             <ErrorMessage
                                 class="text-danger"
-                                name="contactNo"
+                                name="contact_no"
                             />
                         </div>
 
@@ -256,6 +287,7 @@ export default defineComponent({
                                 name="email"
                                 type="text"
                                 class="form-control"
+                                 v-model="formData.email"
                             />
                             <ErrorMessage class="text-danger" name="email" />
                         </div>
@@ -270,7 +302,7 @@ export default defineComponent({
                                 name="region"
                                 as="select"
                                 class="form-control"
-                                v-model="formData.Region"
+                                v-model="formData.addressTo.Region"
                                 @change="getProvince()"
                             >
                                 <option>Select Region</option>
@@ -293,7 +325,7 @@ export default defineComponent({
                                 name="province"
                                 as="select"
                                 class="form-control"
-                                v-model="formData.Province"
+                                v-model="formData.addressTo.Province"
                                 @change="getMunicipality()"
                             >
                                 <option>Select Province</option>
@@ -317,7 +349,7 @@ export default defineComponent({
                                 name="cityMun"
                                 as="select"
                                 class="form-control"
-                                v-model="formData.CityMunicipality"
+                                v-model="formData.addressTo.CityMunicipality"
                                 @change="getBarangay()"
                             >
                                 <option>Select City/Municipality</option>
@@ -337,7 +369,9 @@ export default defineComponent({
 
                         <div class="col-lg-4 mt-2">
                             <label for="brgy">Barangay</label>
-                            <Field name="brgy" as="select" class="form-control">
+                            <Field name="brgy" as="select" class="form-control"
+                             v-model="formData.addressTo.barangay"
+                            >
                                 <option>Select Barangay</option>
                                 <option
                                     v-if="listOfBarangay.data"
@@ -361,6 +395,7 @@ export default defineComponent({
                                 type="text"
                                 class="form-control"
                                 placeholder="Enter Room/Floor/Unit No. , Bldg. Name, House Lot/Block, Street , Subdivision"
+                                v-model="formData.addressTo.address"
                             />
                             <ErrorMessage class="text-danger" name="address" />
                         </div>

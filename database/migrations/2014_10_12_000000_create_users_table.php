@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('birthdate');
             $table->string('gender');
             $table->string('contact_no');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->boolean('isPWD');
+            $table->string('disabilities')->nullable();
             $table->string('vital_status')->default('Alive')->comment('Alive or Deceased');
             $table->String('resident_number');
             $table->string('password');

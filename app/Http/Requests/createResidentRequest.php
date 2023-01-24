@@ -13,9 +13,10 @@ class createResidentRequest extends FormRequest
      */
     public function authorize()
     {
-        if(Auth::check()) {
-            return true;
-        }
+        // if(Auth::check()) {
+        //     return true;
+        // }
+        return true;
       
     }
 
@@ -34,7 +35,8 @@ class createResidentRequest extends FormRequest
             'contact_no' => 'required|max:11',
             'email' => 'unique:users,email',
             'isPWD' => 'required',
-            'password' => 'required',
+            'disabilities' => '',
+            
         ];
     }
 }
