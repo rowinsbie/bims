@@ -4,6 +4,9 @@ import * as yup from "yup";
 import FormWizard from "@/components/forms/wizard/MultiStepForm.vue";
 import FormStep from "@/components/forms/wizard/FormStep.vue";
 import { provide } from "vue";
+import { ResidentAPI } from "@/stores/Resident";
+
+const ResidentEndpoint = ResidentAPI();
 
 const stepDetails = [
     {
@@ -59,6 +62,7 @@ const validationSchema = [
  * Only Called when the last step is submitted
  */
 function onSubmit(formData) {
+    ResidentEndpoint.REGISTER_RESIDENT(formData);
     console.table(JSON.stringify(formData, null, 2));
 }
 </script>

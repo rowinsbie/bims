@@ -15,7 +15,6 @@
       <button type="submit" class="btn btn-primary ml-5">{{ isLastStep ? 'Submit' : 'Next' }}</button>
     </div>
 
-    <pre>{{ values }}</pre>
   </form>
 </template>
 <script lang="ts">

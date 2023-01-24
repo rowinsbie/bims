@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\ResidentAddress;
+
 use App\Http\Requests\createResidentRequest;
 use Hash;
 class ResidentManagementAPIController extends Controller
@@ -22,22 +24,44 @@ class ResidentManagementAPIController extends Controller
     }
 
     /**
-     * add a new resident
-     *
-     * @param  App\Http\Requests\createResidentRequest $request
-     * @return \Illuminate\Http\Response
+     * > The function creates a new user and a new resident address
+     * 
+     * @param createResidentRequest request This is the request object that contains the data that was
+     * sent from the frontend.
+     * 
+     * @return A JSON response.
      */
     public function store(createResidentRequest $request)
     {
         $response = [];
+       /* Creating a random password and a random resident number. */
         $request['resident_number'] = date('Y').rand(0,96399);
-        $request['password'] = Hash::make($request['password']);
+        $request['password'] = Hash::make("pass1234");
         try {
-            $NewUser = User::create($request->all());
-            if($NewUser) {
+            /* Creating a new user and excluding the region, province, cityMun, brgy, and address. */
+            $NewUser = User::create($request->except([
+                'region',
+                'province',
+                'cityMun',
+                'brgy',
+                'address'
+            ]));
+
+           /* Creating a new resident address. */
+            $residentAddress = ResidentAddress::create([
+                'resident_id' => $NewUser->id,
+                'region_id' => $request['region'],
+                'province_id' => $request['province'],
+                'municipal_id' => $request['cityMun'],
+                'barangay_id' => $request['brgy'],
+                'Address' => $request['address']
+            ]);
+           /* Checking if the user and the resident address has been created. */
+            if($NewUser && $residentAddress) {
                 $response['message'] = "New Resident has been registered";
             }
         } catch(Exception $e) {
+           /* Getting the error message and storing it in the response array. */
             $response['message'] = $e->getMessage();
         }
         return Response()->json($response);
