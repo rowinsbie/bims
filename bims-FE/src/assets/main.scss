@@ -2,7 +2,9 @@
 @import 'variables';
 @import 'resetter';
 @import 'colors';
-
+body {
+    background-color: rgb(248, 248, 248);
+}
 .card-with-radius {
     border-radius: 20px 20px 20px 20px;
 }
@@ -12,6 +14,10 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
+}
+
+.color-label {
+    color:rgb(62, 62, 62);
 }
 
 @media screen and (max-width: $xsAndsm),
