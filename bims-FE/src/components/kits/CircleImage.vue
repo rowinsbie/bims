@@ -22,8 +22,8 @@ import  { defineComponent } from 'vue';
     })
 </script>
 <template>
-    <div class="circle">
-        <img   class="" :style="[imgWidth,imgHeight]" :src=imgSrc />
+    <div class="circle" >
+        <img   :style="[imgWidth,imgHeight]" :src=imgSrc />
     </div>
 </template>
 <style lang="scss">

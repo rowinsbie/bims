@@ -139,8 +139,9 @@ export default defineComponent({
 </script>
 <template>
     <LayOut>
-        <div>
-            <FormWizard
+        <div class="card">
+           <div class="card-body">
+                 <FormWizard
                 :validation-schema="validationSchema"
                 @submit="onSubmit"
                 :stepDetail="stepDetails"
@@ -406,6 +407,7 @@ export default defineComponent({
                     </div>
                 </FormStep>
             </FormWizard>
+           </div>
         </div>
     </LayOut>
 </template>
